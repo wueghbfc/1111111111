@@ -1,6 +1,13 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// Fix for TS2580: Cannot find name 'process'.
+// We declare it manually here to avoid needing @types/node
+declare const process: {
+  cwd: () => string;
+  env: Record<string, string | undefined>;
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
