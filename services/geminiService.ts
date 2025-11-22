@@ -2,6 +2,13 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { PlayerState, AIResponseSchema, GameLogEntry } from "../types";
 
+// Fix for TS2580: Cannot find name 'process'.
+declare var process: {
+  env: {
+    [key: string]: string | undefined;
+  };
+};
+
 const apiKey = process.env.API_KEY;
 
 // Helper to create the client ensures we always use the latest key if env changes
